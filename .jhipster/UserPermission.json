@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071024",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_permission",
+  "fields": [
+    {
+      "fieldName": "action",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "document",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "UserPermission",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userRole",
+      "otherEntityRelationshipName": "userPermission",
+      "ownerSide": false,
+      "relationshipName": "userRole",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

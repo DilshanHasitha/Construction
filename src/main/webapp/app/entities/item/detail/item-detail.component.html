@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="item">
+      <h2 data-cy="itemDetailsHeading"><span>Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ item.id }}</span>
+        </dd>
+        <dt><span>Item Price</span></dt>
+        <dd>
+          <span>{{ item.itemPrice }}</span>
+        </dd>
+        <dt><span>Item Cost</span></dt>
+        <dd>
+          <span>{{ item.itemCost }}</span>
+        </dd>
+        <dt><span>Banner Text</span></dt>
+        <dd>
+          <span>{{ item.bannerText }}</span>
+        </dd>
+        <dt><span>Special Price</span></dt>
+        <dd>
+          <span>{{ item.specialPrice }}</span>
+        </dd>
+        <dt><span>Is Active</span></dt>
+        <dd>
+          <span>{{ item.isActive }}</span>
+        </dd>
+        <dt><span>Min QTY</span></dt>
+        <dd>
+          <span>{{ item.minQTY }}</span>
+        </dd>
+        <dt><span>Max QTY</span></dt>
+        <dd>
+          <span>{{ item.maxQTY }}</span>
+        </dd>
+        <dt><span>Steps</span></dt>
+        <dd>
+          <span>{{ item.steps }}</span>
+        </dd>
+        <dt><span>Long Description</span></dt>
+        <dd>
+          <span>{{ item.longDescription }}</span>
+        </dd>
+        <dt><span>Lead Time</span></dt>
+        <dd>
+          <span>{{ item.leadTime }}</span>
+        </dd>
+        <dt><span>Reorder Qty</span></dt>
+        <dd>
+          <span>{{ item.reorderQty }}</span>
+        </dd>
+        <dt><span>Item Barcode</span></dt>
+        <dd>
+          <span>{{ item.itemBarcode }}</span>
+        </dd>
+        <dt><span>Master Item</span></dt>
+        <dd>
+          <div *ngIf="item.masterItem">
+            <a [routerLink]="['/master-item', item.masterItem.id, 'view']">{{ item.masterItem.name }}</a>
+          </div>
+        </dd>
+        <dt><span>Unit</span></dt>
+        <dd>
+          <div *ngIf="item.unit">
+            <a [routerLink]="['/unit-of-measure', item.unit.id, 'view']">{{ item.unit.unitOfMeasureDescription }}</a>
+          </div>
+        </dd>
+        <dt><span>Ex User</span></dt>
+        <dd>
+          <div *ngIf="item.exUser">
+            <a [routerLink]="['/ex-user', item.exUser.id, 'view']">{{ item.exUser.userName }}</a>
+          </div>
+        </dd>
+        <dt><span>Rating</span></dt>
+        <dd>
+          <span *ngFor="let rating of item.ratings; let last = last">
+            <a [routerLink]="['/rating', rating.id, 'view']">{{ rating.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Certificate</span></dt>
+        <dd>
+          <span *ngFor="let certificate of item.certificates; let last = last">
+            <a [routerLink]="['/certificate', certificate.id, 'view']">{{ certificate.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/item', item.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

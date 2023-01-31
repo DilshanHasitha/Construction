@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity BOQs.
+    -->
+    <changeSet id="20230131071038-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="constructors_id"
+                                 baseTableName="bo_qs"
+                                 constraintName="fk_bo_qs__constructors_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ex_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="bo_qs_id"
+                                 baseTableName="rel_bo_qs__boq_details"
+                                 constraintName="fk_rel_bo_qs__boq_details__bo_qs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bo_qs"/>
+
+        <addForeignKeyConstraint baseColumnNames="boq_details_id"
+                                 baseTableName="rel_bo_qs__boq_details"
+                                 constraintName="fk_rel_bo_qs__boq_details__boq_details_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="boq_details"/>
+    </changeSet>
+</databaseChangeLog>

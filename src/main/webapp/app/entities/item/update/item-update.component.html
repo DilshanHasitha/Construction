@@ -1,0 +1,208 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-item-heading" data-cy="ItemCreateUpdateHeading">Create or edit a Item</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_itemPrice">Item Price</label>
+          <input type="number" class="form-control" name="itemPrice" id="field_itemPrice" data-cy="itemPrice" formControlName="itemPrice" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_itemCost">Item Cost</label>
+          <input type="number" class="form-control" name="itemCost" id="field_itemCost" data-cy="itemCost" formControlName="itemCost" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_bannerText">Banner Text</label>
+          <input
+            type="text"
+            class="form-control"
+            name="bannerText"
+            id="field_bannerText"
+            data-cy="bannerText"
+            formControlName="bannerText"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_specialPrice">Special Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="specialPrice"
+            id="field_specialPrice"
+            data-cy="specialPrice"
+            formControlName="specialPrice"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_minQTY">Min QTY</label>
+          <input type="number" class="form-control" name="minQTY" id="field_minQTY" data-cy="minQTY" formControlName="minQTY" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_maxQTY">Max QTY</label>
+          <input type="number" class="form-control" name="maxQTY" id="field_maxQTY" data-cy="maxQTY" formControlName="maxQTY" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_steps">Steps</label>
+          <input type="number" class="form-control" name="steps" id="field_steps" data-cy="steps" formControlName="steps" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_longDescription">Long Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="longDescription"
+            id="field_longDescription"
+            data-cy="longDescription"
+            formControlName="longDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_leadTime">Lead Time</label>
+          <input type="number" class="form-control" name="leadTime" id="field_leadTime" data-cy="leadTime" formControlName="leadTime" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_reorderQty">Reorder Qty</label>
+          <input
+            type="number"
+            class="form-control"
+            name="reorderQty"
+            id="field_reorderQty"
+            data-cy="reorderQty"
+            formControlName="reorderQty"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_itemBarcode">Item Barcode</label>
+          <input
+            type="text"
+            class="form-control"
+            name="itemBarcode"
+            id="field_itemBarcode"
+            data-cy="itemBarcode"
+            formControlName="itemBarcode"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_masterItem">Master Item</label>
+          <select
+            class="form-control"
+            id="field_masterItem"
+            data-cy="masterItem"
+            name="masterItem"
+            formControlName="masterItem"
+            [compareWith]="compareMasterItem"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="masterItemOption" *ngFor="let masterItemOption of masterItemsSharedCollection">
+              {{ masterItemOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_unit">Unit</label>
+          <select
+            class="form-control"
+            id="field_unit"
+            data-cy="unit"
+            name="unit"
+            formControlName="unit"
+            [compareWith]="compareUnitOfMeasure"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="unitOfMeasureOption" *ngFor="let unitOfMeasureOption of unitOfMeasuresSharedCollection">
+              {{ unitOfMeasureOption.unitOfMeasureDescription }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_exUser">Ex User</label>
+          <select
+            class="form-control"
+            id="field_exUser"
+            data-cy="exUser"
+            name="exUser"
+            formControlName="exUser"
+            [compareWith]="compareExUser"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="exUserOption" *ngFor="let exUserOption of exUsersSharedCollection">{{ exUserOption.userName }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_ratings">Rating</label>
+          <select
+            class="form-control"
+            id="field_ratings"
+            data-cy="rating"
+            multiple
+            name="ratings"
+            formControlName="ratings"
+            [compareWith]="compareRating"
+          >
+            <option [ngValue]="ratingOption" *ngFor="let ratingOption of ratingsSharedCollection">{{ ratingOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_certificates">Certificate</label>
+          <select
+            class="form-control"
+            id="field_certificates"
+            data-cy="certificate"
+            multiple
+            name="certificates"
+            formControlName="certificates"
+            [compareWith]="compareCertificate"
+          >
+            <option [ngValue]="certificateOption" *ngFor="let certificateOption of certificatesSharedCollection">
+              {{ certificateOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

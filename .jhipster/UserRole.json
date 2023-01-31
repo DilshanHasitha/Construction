@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071023",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_role",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userRole",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "UserRole",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "document",
+      "otherEntityName": "userPermission",
+      "otherEntityRelationshipName": "userRole",
+      "ownerSide": true,
+      "relationshipName": "userPermission",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

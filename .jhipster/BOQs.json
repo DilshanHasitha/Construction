@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071038",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "bo_qs",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "BOQs",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "userName",
+      "otherEntityName": "exUser",
+      "relationshipName": "constructors",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bOQDetails",
+      "otherEntityRelationshipName": "boqs",
+      "ownerSide": true,
+      "relationshipName": "boqDetails",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

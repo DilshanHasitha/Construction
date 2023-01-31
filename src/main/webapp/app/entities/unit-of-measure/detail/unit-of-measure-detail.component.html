@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="unitOfMeasure">
+      <h2 data-cy="unitOfMeasureDetailsHeading"><span>Unit Of Measure</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ unitOfMeasure.id }}</span>
+        </dd>
+        <dt><span>Unit Of Measure Code</span></dt>
+        <dd>
+          <span>{{ unitOfMeasure.unitOfMeasureCode }}</span>
+        </dd>
+        <dt><span>Unit Of Measure Description</span></dt>
+        <dd>
+          <span>{{ unitOfMeasure.unitOfMeasureDescription }}</span>
+        </dd>
+        <dt><span>Is Active</span></dt>
+        <dd>
+          <span>{{ unitOfMeasure.isActive }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/unit-of-measure', unitOfMeasure.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

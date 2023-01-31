@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="bOQDetails">
+      <h2 data-cy="bOQDetailsDetailsHeading"><span>BOQ Details</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ bOQDetails.id }}</span>
+        </dd>
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ bOQDetails.code }}</span>
+        </dd>
+        <dt><span>Order Placed On</span></dt>
+        <dd>
+          <span>{{ bOQDetails.orderPlacedOn | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Qty</span></dt>
+        <dd>
+          <span>{{ bOQDetails.qty }}</span>
+        </dd>
+        <dt><span>Is Active</span></dt>
+        <dd>
+          <span>{{ bOQDetails.isActive }}</span>
+        </dd>
+        <dt><span>Item</span></dt>
+        <dd>
+          <div *ngIf="bOQDetails.item">
+            <a [routerLink]="['/master-item', bOQDetails.item.id, 'view']">{{ bOQDetails.item.code }}</a>
+          </div>
+        </dd>
+        <dt><span>Per</span></dt>
+        <dd>
+          <div *ngIf="bOQDetails.per">
+            <a [routerLink]="['/unit-of-measure', bOQDetails.per.id, 'view']">{{ bOQDetails.per.unitOfMeasureDescription }}</a>
+          </div>
+        </dd>
+        <dt><span>Unit</span></dt>
+        <dd>
+          <div *ngIf="bOQDetails.unit">
+            <a [routerLink]="['/unit-of-measure', bOQDetails.unit.id, 'view']">{{ bOQDetails.unit.unitOfMeasureDescription }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/boq-details', bOQDetails.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

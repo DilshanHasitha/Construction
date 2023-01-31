@@ -1,0 +1,135 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-orders-heading" data-cy="OrdersCreateUpdateHeading">Create or edit a Orders</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_orderID">Order ID</label>
+          <input type="text" class="form-control" name="orderID" id="field_orderID" data-cy="orderID" formControlName="orderID" />
+          <div *ngIf="editForm.get('orderID')!.invalid && (editForm.get('orderID')!.dirty || editForm.get('orderID')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('orderID')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_customerName">Customer Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="customerName"
+            id="field_customerName"
+            data-cy="customerName"
+            formControlName="customerName"
+          />
+          <div
+            *ngIf="editForm.get('customerName')!.invalid && (editForm.get('customerName')!.dirty || editForm.get('customerName')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('customerName')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_orderPlacedOn">Order Placed On</label>
+          <div class="input-group">
+            <input
+              id="field_orderPlacedOn"
+              data-cy="orderPlacedOn"
+              type="text"
+              class="form-control"
+              name="orderPlacedOn"
+              ngbDatepicker
+              #orderPlacedOnDp="ngbDatepicker"
+              formControlName="orderPlacedOn"
+            />
+            <button type="button" class="btn btn-secondary" (click)="orderPlacedOnDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_note">Note</label>
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_exUser">Ex User</label>
+          <select
+            class="form-control"
+            id="field_exUser"
+            data-cy="exUser"
+            name="exUser"
+            formControlName="exUser"
+            [compareWith]="compareExUser"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="exUserOption" *ngFor="let exUserOption of exUsersSharedCollection">{{ exUserOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_orderStatus">Order Status</label>
+          <select
+            class="form-control"
+            id="field_orderStatus"
+            data-cy="orderStatus"
+            name="orderStatus"
+            formControlName="orderStatus"
+            [compareWith]="compareOrderStatus"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="orderStatusOption" *ngFor="let orderStatusOption of orderStatusesSharedCollection">
+              {{ orderStatusOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_orderDetails">Order Details</label>
+          <select
+            class="form-control"
+            id="field_orderDetails"
+            data-cy="orderDetails"
+            multiple
+            name="orderDetails"
+            formControlName="orderDetails"
+            [compareWith]="compareOrderDetails"
+          >
+            <option [ngValue]="orderDetailsOption" *ngFor="let orderDetailsOption of orderDetailsSharedCollection">
+              {{ orderDetailsOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071033",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "item",
+  "fields": [
+    {
+      "fieldName": "itemPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "itemCost",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "bannerText",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "specialPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "minQTY",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "maxQTY",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "steps",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "longDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "leadTime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "reorderQty",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "itemBarcode",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Item",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "masterItem",
+      "relationshipName": "masterItem",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "unitOfMeasureDescription",
+      "otherEntityName": "unitOfMeasure",
+      "relationshipName": "unit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "userName",
+      "otherEntityName": "exUser",
+      "relationshipName": "exUser",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "rating",
+      "otherEntityRelationshipName": "exUser",
+      "ownerSide": true,
+      "relationshipName": "rating",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "certificate",
+      "otherEntityRelationshipName": "item",
+      "ownerSide": true,
+      "relationshipName": "certificate",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

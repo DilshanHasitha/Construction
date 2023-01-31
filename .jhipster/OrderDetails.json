@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071036",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "order_details",
+  "fields": [
+    {
+      "fieldName": "orderQty",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "revisedItemSalesPrice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "OrderDetails",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "item",
+      "relationshipName": "item",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "orders",
+      "otherEntityRelationshipName": "orderDetails",
+      "ownerSide": false,
+      "relationshipName": "orders",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

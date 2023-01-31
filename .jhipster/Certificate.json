@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071030",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "certificate",
+  "fields": [
+    {
+      "fieldName": "imgUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Certificate",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "certificateType",
+      "relationshipName": "certificateType",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "certificate",
+      "ownerSide": false,
+      "relationshipName": "item",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

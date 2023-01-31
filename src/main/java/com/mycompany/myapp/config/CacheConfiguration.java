@@ -48,6 +48,35 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.domain.ExUser.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UserRole.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UserRole.class.getName() + ".userPermissions");
+            createCache(cm, com.mycompany.myapp.domain.UserPermission.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UserPermission.class.getName() + ".userRoles");
+            createCache(cm, com.mycompany.myapp.domain.Company.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Project.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Location.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Rating.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Rating.class.getName() + ".exUsers");
+            createCache(cm, com.mycompany.myapp.domain.RatingType.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Certificate.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Certificate.class.getName() + ".items");
+            createCache(cm, com.mycompany.myapp.domain.CertificateType.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.MasterItem.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Item.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Item.class.getName() + ".ratings");
+            createCache(cm, com.mycompany.myapp.domain.Item.class.getName() + ".certificates");
+            createCache(cm, com.mycompany.myapp.domain.Orders.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Orders.class.getName() + ".orderDetails");
+            createCache(cm, com.mycompany.myapp.domain.OrderStatus.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.OrderDetails.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.OrderDetails.class.getName() + ".orders");
+            createCache(cm, com.mycompany.myapp.domain.UnitOfMeasure.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.BOQs.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.BOQs.class.getName() + ".boqDetails");
+            createCache(cm, com.mycompany.myapp.domain.BOQDetails.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.BOQDetails.class.getName() + ".boqs");
+            createCache(cm, com.mycompany.myapp.domain.UserType.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

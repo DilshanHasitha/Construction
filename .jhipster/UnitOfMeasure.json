@@ -1,0 +1,30 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071037",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "unit_of_measure",
+  "fields": [
+    {
+      "fieldName": "unitOfMeasureCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "unitOfMeasureDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "UnitOfMeasure",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

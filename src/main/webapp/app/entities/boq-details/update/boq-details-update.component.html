@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-boq-details-heading" data-cy="BOQDetailsCreateUpdateHeading">Create or edit a BOQ Details</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_orderPlacedOn">Order Placed On</label>
+          <div class="input-group">
+            <input
+              id="field_orderPlacedOn"
+              data-cy="orderPlacedOn"
+              type="text"
+              class="form-control"
+              name="orderPlacedOn"
+              ngbDatepicker
+              #orderPlacedOnDp="ngbDatepicker"
+              formControlName="orderPlacedOn"
+            />
+            <button type="button" class="btn btn-secondary" (click)="orderPlacedOnDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_qty">Qty</label>
+          <input type="number" class="form-control" name="qty" id="field_qty" data-cy="qty" formControlName="qty" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_item">Item</label>
+          <select class="form-control" id="field_item" data-cy="item" name="item" formControlName="item" [compareWith]="compareMasterItem">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="masterItemOption" *ngFor="let masterItemOption of masterItemsSharedCollection">
+              {{ masterItemOption.code }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_per">Per</label>
+          <select class="form-control" id="field_per" data-cy="per" name="per" formControlName="per" [compareWith]="compareUnitOfMeasure">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="unitOfMeasureOption" *ngFor="let unitOfMeasureOption of unitOfMeasuresSharedCollection">
+              {{ unitOfMeasureOption.unitOfMeasureDescription }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_unit">Unit</label>
+          <select
+            class="form-control"
+            id="field_unit"
+            data-cy="unit"
+            name="unit"
+            formControlName="unit"
+            [compareWith]="compareUnitOfMeasure"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="unitOfMeasureOption" *ngFor="let unitOfMeasureOption of unitOfMeasuresSharedCollection">
+              {{ unitOfMeasureOption.unitOfMeasureDescription }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

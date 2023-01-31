@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071029",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "rating_type",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "RatingType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

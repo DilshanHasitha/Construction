@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071034",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "orders",
+  "fields": [
+    {
+      "fieldName": "orderID",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "customerName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "orderPlacedOn",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Orders",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "exUser",
+      "relationshipName": "exUser",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "orderStatus",
+      "relationshipName": "orderStatus",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "orderDetails",
+      "otherEntityRelationshipName": "orders",
+      "ownerSide": true,
+      "relationshipName": "orderDetails",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

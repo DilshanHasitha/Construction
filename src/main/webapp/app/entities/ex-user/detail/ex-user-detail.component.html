@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="exUser">
+      <h2 data-cy="exUserDetailsHeading"><span>Ex User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ exUser.id }}</span>
+        </dd>
+        <dt><span>Login</span></dt>
+        <dd>
+          <span>{{ exUser.login }}</span>
+        </dd>
+        <dt><span>User Name</span></dt>
+        <dd>
+          <span>{{ exUser.userName }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ exUser.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ exUser.lastName }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ exUser.email }}</span>
+        </dd>
+        <dt><span>Is Active</span></dt>
+        <dd>
+          <span>{{ exUser.isActive }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ exUser.phone }}</span>
+        </dd>
+        <dt><span>Br Number</span></dt>
+        <dd>
+          <span>{{ exUser.brNumber }}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ exUser.user?.id }}</span>
+        </dd>
+        <dt><span>User Role</span></dt>
+        <dd>
+          <div *ngIf="exUser.userRole">
+            <a [routerLink]="['/user-role', exUser.userRole.id, 'view']">{{ exUser.userRole.userRole }}</a>
+          </div>
+        </dd>
+        <dt><span>Company</span></dt>
+        <dd>
+          <div *ngIf="exUser.company">
+            <a [routerLink]="['/company', exUser.company.id, 'view']">{{ exUser.company.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ex-user', exUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

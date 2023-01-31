@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Item.
+    -->
+    <changeSet id="20230131071033-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="master_item_id"
+                                 baseTableName="item"
+                                 constraintName="fk_item__master_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="master_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="unit_id"
+                                 baseTableName="item"
+                                 constraintName="fk_item__unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit_of_measure"/>
+
+        <addForeignKeyConstraint baseColumnNames="ex_user_id"
+                                 baseTableName="item"
+                                 constraintName="fk_item__ex_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ex_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="item_id"
+                                 baseTableName="rel_item__rating"
+                                 constraintName="fk_rel_item__rating__item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+
+        <addForeignKeyConstraint baseColumnNames="rating_id"
+                                 baseTableName="rel_item__rating"
+                                 constraintName="fk_rel_item__rating__rating_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating"/>
+
+        <addForeignKeyConstraint baseColumnNames="item_id"
+                                 baseTableName="rel_item__certificate"
+                                 constraintName="fk_rel_item__certificate__item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+
+        <addForeignKeyConstraint baseColumnNames="certificate_id"
+                                 baseTableName="rel_item__certificate"
+                                 constraintName="fk_rel_item__certificate__certificate_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="certificate"/>
+    </changeSet>
+</databaseChangeLog>

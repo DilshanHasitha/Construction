@@ -1,0 +1,169 @@
+entity ExUser {
+	login String required,
+    userName String required,
+    firstName String,
+    lastName String,
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+    isActive Boolean,
+    phone Integer,
+    brNumber String,
+}
+
+entity UserRole {
+	code String,
+    userRole String required, 
+    isActive Boolean 
+}
+entity UserPermission{
+    action String required,
+    document String required,
+    description String required,
+}
+
+entity Company {
+	code String,
+    name String required,
+    brNumber String,
+    isActive Boolean 
+}
+
+entity Project {
+	code String,
+    name String required,
+    isActive Boolean,
+    description String,
+    completionDate LocalDate,
+    regNumber String,
+    notes String,
+    address String,
+}
+entity Location {
+    code String ,
+    city String,
+    country String required,
+    countryCode String,
+    lat Integer,
+    lon Integer,
+    isActive Boolean 
+}
+entity Rating {
+    name String ,
+    rateValue Double,
+}
+entity RatingType {
+    name String ,
+    description Double,
+}
+entity Certificate{
+    imgUrl String,
+    description String,
+}
+entity CertificateType{
+    code String required,
+    name String,
+    isActive Boolean   
+}
+entity MasterItem {
+	code String required,
+    name String required
+    description String,
+    isActive Boolean,
+}
+entity Item {
+    itemPrice BigDecimal,
+    itemCost BigDecimal,
+    bannerText String,
+    specialPrice BigDecimal,
+    isActive Boolean,
+    minQTY Double,
+    maxQTY Double,
+    steps Double,
+    longDescription String,
+    leadTime Integer,
+    reorderQty Double,
+    itemBarcode String,   
+} 
+entity Orders {
+	orderID String required,
+	customerName String required,
+    isActive Boolean,
+    orderPlacedOn LocalDate,
+    note String
+}
+entity OrderStatus {
+	code String required,
+    description String required,
+    isActive Boolean
+}
+entity OrderDetails {
+	orderQty Double required,
+    revisedItemSalesPrice BigDecimal,
+    note String
+}
+entity UnitOfMeasure {
+	unitOfMeasureCode String required,
+    unitOfMeasureDescription String required,
+    isActive Boolean,
+}
+entity BOQs {
+	code String,
+    isActive Boolean,
+}
+entity BOQDetails {
+	code String required,
+    orderPlacedOn LocalDate,
+    qty Double,
+    isActive Boolean,
+    
+}
+entity UserType {
+	code String,
+    userRole String required,  //Constructor, Vendor, Super Admin,
+    isActive Boolean 
+    
+}
+
+
+relationship OneToOne {
+    ExUser{user} to User{exUser},
+}
+relationship ManyToOne{
+    ExUser{userRole(userRole)} to UserRole,
+    ExUser{company(name)} to Company,
+    Rating{ratingType} to RatingType
+    Certificate{certificateType(code)} to CertificateType,
+    Project{location(city)} to Location,
+    Project{exUser(userName)} to ExUser
+    Item{masterItem(name)} to MasterItem
+    Item{unit(unitOfMeasureDescription)} to UnitOfMeasure
+    MasterItem{exUser(userName)} to ExUser  //only Super Admin
+    Item{exUser(userName)} to ExUser        // vendor
+    
+    OrderDetails{item required} to Item,
+    Orders{ExUser} to ExUser, // constructor
+    Orders{orderStatus} to OrderStatus,
+    
+    BOQs {constructors(userName)} to ExUser
+    BOQDetails{item(code)} to MasterItem
+    BOQDetails{per(unitOfMeasureDescription)} to UnitOfMeasure
+    BOQDetails{unit(unitOfMeasureDescription)} to UnitOfMeasure
+    Company{userType(userRole)} to UserType
+}
+relationship ManyToMany {
+    UserRole{userPermission(document)} to UserPermission{userRole}   
+    Item{rating(name)} to Rating{exUser}
+    Item{certificate} to Certificate{item}
+    Orders{orderDetails} to OrderDetails{orders},
+    BOQs{boqDetails} to BOQDetails{boqs}
+}
+
+
+paginate * with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceClass
+
+filter * 

@@ -1,0 +1,59 @@
+{
+  "applications": "*",
+  "changelogDate": "20230131071039",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "boq_details",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "orderPlacedOn",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "qty",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "BOQDetails",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "masterItem",
+      "relationshipName": "item",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "unitOfMeasureDescription",
+      "otherEntityName": "unitOfMeasure",
+      "relationshipName": "per",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "unitOfMeasureDescription",
+      "otherEntityName": "unitOfMeasure",
+      "relationshipName": "unit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bOQs",
+      "otherEntityRelationshipName": "boqDetails",
+      "ownerSide": false,
+      "relationshipName": "boqs",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

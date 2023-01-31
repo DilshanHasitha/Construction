@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="orders">
+      <h2 data-cy="ordersDetailsHeading"><span>Orders</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ orders.id }}</span>
+        </dd>
+        <dt><span>Order ID</span></dt>
+        <dd>
+          <span>{{ orders.orderID }}</span>
+        </dd>
+        <dt><span>Customer Name</span></dt>
+        <dd>
+          <span>{{ orders.customerName }}</span>
+        </dd>
+        <dt><span>Is Active</span></dt>
+        <dd>
+          <span>{{ orders.isActive }}</span>
+        </dd>
+        <dt><span>Order Placed On</span></dt>
+        <dd>
+          <span>{{ orders.orderPlacedOn | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Note</span></dt>
+        <dd>
+          <span>{{ orders.note }}</span>
+        </dd>
+        <dt><span>Ex User</span></dt>
+        <dd>
+          <div *ngIf="orders.exUser">
+            <a [routerLink]="['/ex-user', orders.exUser.id, 'view']">{{ orders.exUser.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Order Status</span></dt>
+        <dd>
+          <div *ngIf="orders.orderStatus">
+            <a [routerLink]="['/order-status', orders.orderStatus.id, 'view']">{{ orders.orderStatus.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Order Details</span></dt>
+        <dd>
+          <span *ngFor="let orderDetails of orders.orderDetails; let last = last">
+            <a [routerLink]="['/order-details', orderDetails.id, 'view']">{{ orderDetails.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/orders', orders.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

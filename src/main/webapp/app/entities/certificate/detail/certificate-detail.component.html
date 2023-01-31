@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="certificate">
+      <h2 data-cy="certificateDetailsHeading"><span>Certificate</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ certificate.id }}</span>
+        </dd>
+        <dt><span>Img Url</span></dt>
+        <dd>
+          <span>{{ certificate.imgUrl }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ certificate.description }}</span>
+        </dd>
+        <dt><span>Certificate Type</span></dt>
+        <dd>
+          <div *ngIf="certificate.certificateType">
+            <a [routerLink]="['/certificate-type', certificate.certificateType.id, 'view']">{{ certificate.certificateType.code }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/certificate', certificate.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
