@@ -38,6 +38,12 @@
             <column name="address" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="priority" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="progress" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="location_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -73,6 +79,8 @@
             <column name="reg_number" type="string"/>
             <column name="notes" type="string"/>
             <column name="address" type="string"/>
+            <column name="priority" type="string"/>
+            <column name="progress" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

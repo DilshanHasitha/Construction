@@ -69,6 +69,13 @@ class ProjectResourceIT {
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PRIORITY = "AAAAAAAAAA";
+    private static final String UPDATED_PRIORITY = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_PROGRESS = 1;
+    private static final Integer UPDATED_PROGRESS = 2;
+    private static final Integer SMALLER_PROGRESS = 1 - 1;
+
     private static final String ENTITY_API_URL = "/api/projects";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -107,7 +114,9 @@ class ProjectResourceIT {
             .completionDate(DEFAULT_COMPLETION_DATE)
             .regNumber(DEFAULT_REG_NUMBER)
             .notes(DEFAULT_NOTES)
-            .address(DEFAULT_ADDRESS);
+            .address(DEFAULT_ADDRESS)
+            .priority(DEFAULT_PRIORITY)
+            .progress(DEFAULT_PROGRESS);
         return project;
     }
 
@@ -126,7 +135,9 @@ class ProjectResourceIT {
             .completionDate(UPDATED_COMPLETION_DATE)
             .regNumber(UPDATED_REG_NUMBER)
             .notes(UPDATED_NOTES)
-            .address(UPDATED_ADDRESS);
+            .address(UPDATED_ADDRESS)
+            .priority(UPDATED_PRIORITY)
+            .progress(UPDATED_PROGRESS);
         return project;
     }
 
@@ -156,6 +167,8 @@ class ProjectResourceIT {
         assertThat(testProject.getRegNumber()).isEqualTo(DEFAULT_REG_NUMBER);
         assertThat(testProject.getNotes()).isEqualTo(DEFAULT_NOTES);
         assertThat(testProject.getAddress()).isEqualTo(DEFAULT_ADDRESS);
+        assertThat(testProject.getPriority()).isEqualTo(DEFAULT_PRIORITY);
+        assertThat(testProject.getProgress()).isEqualTo(DEFAULT_PROGRESS);
     }
 
     @Test
@@ -212,7 +225,9 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.[*].completionDate").value(hasItem(DEFAULT_COMPLETION_DATE.toString())))
             .andExpect(jsonPath("$.[*].regNumber").value(hasItem(DEFAULT_REG_NUMBER)))
             .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)))
-            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
+            .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
+            .andExpect(jsonPath("$.[*].progress").value(hasItem(DEFAULT_PROGRESS)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -251,7 +266,9 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.completionDate").value(DEFAULT_COMPLETION_DATE.toString()))
             .andExpect(jsonPath("$.regNumber").value(DEFAULT_REG_NUMBER))
             .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES))
-            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS));
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
+            .andExpect(jsonPath("$.priority").value(DEFAULT_PRIORITY))
+            .andExpect(jsonPath("$.progress").value(DEFAULT_PROGRESS));
     }
 
     @Test
@@ -794,6 +811,162 @@ class ProjectResourceIT {
 
     @Test
     @Transactional
+    void getAllProjectsByPriorityIsEqualToSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where priority equals to DEFAULT_PRIORITY
+        defaultProjectShouldBeFound("priority.equals=" + DEFAULT_PRIORITY);
+
+        // Get all the projectList where priority equals to UPDATED_PRIORITY
+        defaultProjectShouldNotBeFound("priority.equals=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByPriorityIsInShouldWork() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where priority in DEFAULT_PRIORITY or UPDATED_PRIORITY
+        defaultProjectShouldBeFound("priority.in=" + DEFAULT_PRIORITY + "," + UPDATED_PRIORITY);
+
+        // Get all the projectList where priority equals to UPDATED_PRIORITY
+        defaultProjectShouldNotBeFound("priority.in=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByPriorityIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where priority is not null
+        defaultProjectShouldBeFound("priority.specified=true");
+
+        // Get all the projectList where priority is null
+        defaultProjectShouldNotBeFound("priority.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByPriorityContainsSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where priority contains DEFAULT_PRIORITY
+        defaultProjectShouldBeFound("priority.contains=" + DEFAULT_PRIORITY);
+
+        // Get all the projectList where priority contains UPDATED_PRIORITY
+        defaultProjectShouldNotBeFound("priority.contains=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByPriorityNotContainsSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where priority does not contain DEFAULT_PRIORITY
+        defaultProjectShouldNotBeFound("priority.doesNotContain=" + DEFAULT_PRIORITY);
+
+        // Get all the projectList where priority does not contain UPDATED_PRIORITY
+        defaultProjectShouldBeFound("priority.doesNotContain=" + UPDATED_PRIORITY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsEqualToSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress equals to DEFAULT_PROGRESS
+        defaultProjectShouldBeFound("progress.equals=" + DEFAULT_PROGRESS);
+
+        // Get all the projectList where progress equals to UPDATED_PROGRESS
+        defaultProjectShouldNotBeFound("progress.equals=" + UPDATED_PROGRESS);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsInShouldWork() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress in DEFAULT_PROGRESS or UPDATED_PROGRESS
+        defaultProjectShouldBeFound("progress.in=" + DEFAULT_PROGRESS + "," + UPDATED_PROGRESS);
+
+        // Get all the projectList where progress equals to UPDATED_PROGRESS
+        defaultProjectShouldNotBeFound("progress.in=" + UPDATED_PROGRESS);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress is not null
+        defaultProjectShouldBeFound("progress.specified=true");
+
+        // Get all the projectList where progress is null
+        defaultProjectShouldNotBeFound("progress.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress is greater than or equal to DEFAULT_PROGRESS
+        defaultProjectShouldBeFound("progress.greaterThanOrEqual=" + DEFAULT_PROGRESS);
+
+        // Get all the projectList where progress is greater than or equal to UPDATED_PROGRESS
+        defaultProjectShouldNotBeFound("progress.greaterThanOrEqual=" + UPDATED_PROGRESS);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress is less than or equal to DEFAULT_PROGRESS
+        defaultProjectShouldBeFound("progress.lessThanOrEqual=" + DEFAULT_PROGRESS);
+
+        // Get all the projectList where progress is less than or equal to SMALLER_PROGRESS
+        defaultProjectShouldNotBeFound("progress.lessThanOrEqual=" + SMALLER_PROGRESS);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsLessThanSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress is less than DEFAULT_PROGRESS
+        defaultProjectShouldNotBeFound("progress.lessThan=" + DEFAULT_PROGRESS);
+
+        // Get all the projectList where progress is less than UPDATED_PROGRESS
+        defaultProjectShouldBeFound("progress.lessThan=" + UPDATED_PROGRESS);
+    }
+
+    @Test
+    @Transactional
+    void getAllProjectsByProgressIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        projectRepository.saveAndFlush(project);
+
+        // Get all the projectList where progress is greater than DEFAULT_PROGRESS
+        defaultProjectShouldNotBeFound("progress.greaterThan=" + DEFAULT_PROGRESS);
+
+        // Get all the projectList where progress is greater than SMALLER_PROGRESS
+        defaultProjectShouldBeFound("progress.greaterThan=" + SMALLER_PROGRESS);
+    }
+
+    @Test
+    @Transactional
     void getAllProjectsByLocationIsEqualToSomething() throws Exception {
         Location location;
         if (TestUtil.findAll(em, Location.class).isEmpty()) {
@@ -854,7 +1027,9 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.[*].completionDate").value(hasItem(DEFAULT_COMPLETION_DATE.toString())))
             .andExpect(jsonPath("$.[*].regNumber").value(hasItem(DEFAULT_REG_NUMBER)))
             .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)))
-            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
+            .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
+            .andExpect(jsonPath("$.[*].progress").value(hasItem(DEFAULT_PROGRESS)));
 
         // Check, that the count call also returns 1
         restProjectMockMvc
@@ -910,7 +1085,9 @@ class ProjectResourceIT {
             .completionDate(UPDATED_COMPLETION_DATE)
             .regNumber(UPDATED_REG_NUMBER)
             .notes(UPDATED_NOTES)
-            .address(UPDATED_ADDRESS);
+            .address(UPDATED_ADDRESS)
+            .priority(UPDATED_PRIORITY)
+            .progress(UPDATED_PROGRESS);
 
         restProjectMockMvc
             .perform(
@@ -932,6 +1109,8 @@ class ProjectResourceIT {
         assertThat(testProject.getRegNumber()).isEqualTo(UPDATED_REG_NUMBER);
         assertThat(testProject.getNotes()).isEqualTo(UPDATED_NOTES);
         assertThat(testProject.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testProject.getPriority()).isEqualTo(UPDATED_PRIORITY);
+        assertThat(testProject.getProgress()).isEqualTo(UPDATED_PROGRESS);
     }
 
     @Test
@@ -1007,7 +1186,9 @@ class ProjectResourceIT {
             .description(UPDATED_DESCRIPTION)
             .completionDate(UPDATED_COMPLETION_DATE)
             .notes(UPDATED_NOTES)
-            .address(UPDATED_ADDRESS);
+            .address(UPDATED_ADDRESS)
+            .priority(UPDATED_PRIORITY)
+            .progress(UPDATED_PROGRESS);
 
         restProjectMockMvc
             .perform(
@@ -1029,6 +1210,8 @@ class ProjectResourceIT {
         assertThat(testProject.getRegNumber()).isEqualTo(DEFAULT_REG_NUMBER);
         assertThat(testProject.getNotes()).isEqualTo(UPDATED_NOTES);
         assertThat(testProject.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testProject.getPriority()).isEqualTo(UPDATED_PRIORITY);
+        assertThat(testProject.getProgress()).isEqualTo(UPDATED_PROGRESS);
     }
 
     @Test
@@ -1051,7 +1234,9 @@ class ProjectResourceIT {
             .completionDate(UPDATED_COMPLETION_DATE)
             .regNumber(UPDATED_REG_NUMBER)
             .notes(UPDATED_NOTES)
-            .address(UPDATED_ADDRESS);
+            .address(UPDATED_ADDRESS)
+            .priority(UPDATED_PRIORITY)
+            .progress(UPDATED_PROGRESS);
 
         restProjectMockMvc
             .perform(
@@ -1073,6 +1258,8 @@ class ProjectResourceIT {
         assertThat(testProject.getRegNumber()).isEqualTo(UPDATED_REG_NUMBER);
         assertThat(testProject.getNotes()).isEqualTo(UPDATED_NOTES);
         assertThat(testProject.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testProject.getPriority()).isEqualTo(UPDATED_PRIORITY);
+        assertThat(testProject.getProgress()).isEqualTo(UPDATED_PROGRESS);
     }
 
     @Test

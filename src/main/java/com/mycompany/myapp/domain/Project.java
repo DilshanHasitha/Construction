@@ -49,6 +49,12 @@ public class Project implements Serializable {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "priority")
+    private String priority;
+
+    @Column(name = "progress")
+    private Integer progress;
+
     @ManyToOne
     private Location location;
 
@@ -175,6 +181,32 @@ public class Project implements Serializable {
         this.address = address;
     }
 
+    public String getPriority() {
+        return this.priority;
+    }
+
+    public Project priority(String priority) {
+        this.setPriority(priority);
+        return this;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public Integer getProgress() {
+        return this.progress;
+    }
+
+    public Project progress(Integer progress) {
+        this.setProgress(progress);
+        return this;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
+
     public Location getLocation() {
         return this.location;
     }
@@ -233,6 +265,8 @@ public class Project implements Serializable {
             ", regNumber='" + getRegNumber() + "'" +
             ", notes='" + getNotes() + "'" +
             ", address='" + getAddress() + "'" +
+            ", priority='" + getPriority() + "'" +
+            ", progress=" + getProgress() +
             "}";
     }
 }

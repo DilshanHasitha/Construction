@@ -8,29 +8,33 @@ export const sampleWithRequiredData: IProject = {
 };
 
 export const sampleWithPartialData: IProject = {
-  id: 77481,
-  code: 'Personal enhance Borders',
-  name: 'Centers',
-  description: 'regional Loan bluetooth',
-  completionDate: dayjs('2023-01-31'),
-  notes: 'Product Light Niger',
-  address: 'redundant microchip',
+  id: 61186,
+  code: 'Implemented dot-com Avon',
+  name: 'capacitor',
+  description: 'Investor Loan Avon',
+  completionDate: dayjs('2023-01-30'),
+  notes: 'indexing',
+  address: 'Niger (Slovak mindshare',
+  priority: 'Bike Timor-Leste',
+  progress: 82463,
 };
 
 export const sampleWithFullData: IProject = {
-  id: 16934,
-  code: 'payment',
-  name: 'backing Proactive',
+  id: 2133,
+  code: 'Proactive',
+  name: 'productize Data',
   isActive: true,
-  description: 'Assurance state',
+  description: 'circuit Granite Canyon',
   completionDate: dayjs('2023-01-30'),
-  regNumber: 'Product Berkshire Cotton',
-  notes: 'fresh-thinking Granite EXE',
+  regNumber: 'Ridges infomediaries',
+  notes: 'Uzbekistan EXE',
   address: 'leading Developer',
+  priority: 'open-source Auto',
+  progress: 39852,
 };
 
 export const sampleWithNewData: NewProject = {
-  name: 'open-source Auto',
+  name: 'auxiliary',
   id: null,
 };
 

@@ -34,7 +34,7 @@ public class BOQs implements Serializable {
     @JsonIgnoreProperties(value = { "user", "userRole", "company" }, allowSetters = true)
     private ExUser constructors;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "rel_bo_qs__boq_details",
         joinColumns = @JoinColumn(name = "bo_qs_id"),

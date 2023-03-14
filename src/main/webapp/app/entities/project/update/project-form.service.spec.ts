@@ -28,6 +28,8 @@ describe('Project Form Service', () => {
             regNumber: expect.any(Object),
             notes: expect.any(Object),
             address: expect.any(Object),
+            priority: expect.any(Object),
+            progress: expect.any(Object),
             location: expect.any(Object),
             exUser: expect.any(Object),
           })
@@ -48,6 +50,8 @@ describe('Project Form Service', () => {
             regNumber: expect.any(Object),
             notes: expect.any(Object),
             address: expect.any(Object),
+            priority: expect.any(Object),
+            progress: expect.any(Object),
             location: expect.any(Object),
             exUser: expect.any(Object),
           })

@@ -39,6 +39,10 @@ public class ProjectCriteria implements Serializable, Criteria {
 
     private StringFilter address;
 
+    private StringFilter priority;
+
+    private IntegerFilter progress;
+
     private LongFilter locationId;
 
     private LongFilter exUserId;
@@ -57,6 +61,8 @@ public class ProjectCriteria implements Serializable, Criteria {
         this.regNumber = other.regNumber == null ? null : other.regNumber.copy();
         this.notes = other.notes == null ? null : other.notes.copy();
         this.address = other.address == null ? null : other.address.copy();
+        this.priority = other.priority == null ? null : other.priority.copy();
+        this.progress = other.progress == null ? null : other.progress.copy();
         this.locationId = other.locationId == null ? null : other.locationId.copy();
         this.exUserId = other.exUserId == null ? null : other.exUserId.copy();
         this.distinct = other.distinct;
@@ -202,6 +208,36 @@ public class ProjectCriteria implements Serializable, Criteria {
         this.address = address;
     }
 
+    public StringFilter getPriority() {
+        return priority;
+    }
+
+    public StringFilter priority() {
+        if (priority == null) {
+            priority = new StringFilter();
+        }
+        return priority;
+    }
+
+    public void setPriority(StringFilter priority) {
+        this.priority = priority;
+    }
+
+    public IntegerFilter getProgress() {
+        return progress;
+    }
+
+    public IntegerFilter progress() {
+        if (progress == null) {
+            progress = new IntegerFilter();
+        }
+        return progress;
+    }
+
+    public void setProgress(IntegerFilter progress) {
+        this.progress = progress;
+    }
+
     public LongFilter getLocationId() {
         return locationId;
     }
@@ -259,6 +295,8 @@ public class ProjectCriteria implements Serializable, Criteria {
             Objects.equals(regNumber, that.regNumber) &&
             Objects.equals(notes, that.notes) &&
             Objects.equals(address, that.address) &&
+            Objects.equals(priority, that.priority) &&
+            Objects.equals(progress, that.progress) &&
             Objects.equals(locationId, that.locationId) &&
             Objects.equals(exUserId, that.exUserId) &&
             Objects.equals(distinct, that.distinct)
@@ -277,6 +315,8 @@ public class ProjectCriteria implements Serializable, Criteria {
             regNumber,
             notes,
             address,
+            priority,
+            progress,
             locationId,
             exUserId,
             distinct
@@ -296,6 +336,8 @@ public class ProjectCriteria implements Serializable, Criteria {
             (regNumber != null ? "regNumber=" + regNumber + ", " : "") +
             (notes != null ? "notes=" + notes + ", " : "") +
             (address != null ? "address=" + address + ", " : "") +
+            (priority != null ? "priority=" + priority + ", " : "") +
+            (progress != null ? "progress=" + progress + ", " : "") +
             (locationId != null ? "locationId=" + locationId + ", " : "") +
             (exUserId != null ? "exUserId=" + exUserId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +

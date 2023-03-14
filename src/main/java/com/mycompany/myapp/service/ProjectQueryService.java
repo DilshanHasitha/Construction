@@ -109,6 +109,12 @@ public class ProjectQueryService extends QueryService<Project> {
             if (criteria.getAddress() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getAddress(), Project_.address));
             }
+            if (criteria.getPriority() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPriority(), Project_.priority));
+            }
+            if (criteria.getProgress() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getProgress(), Project_.progress));
+            }
             if (criteria.getLocationId() != null) {
                 specification =
                     specification.and(

@@ -83,6 +83,12 @@ public class ProjectService {
                 if (project.getAddress() != null) {
                     existingProject.setAddress(project.getAddress());
                 }
+                if (project.getPriority() != null) {
+                    existingProject.setPriority(project.getPriority());
+                }
+                if (project.getProgress() != null) {
+                    existingProject.setProgress(project.getProgress());
+                }
 
                 return existingProject;
             })

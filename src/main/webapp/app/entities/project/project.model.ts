@@ -12,6 +12,8 @@ export interface IProject {
   regNumber?: string | null;
   notes?: string | null;
   address?: string | null;
+  priority?: string | null;
+  progress?: number | null;
   location?: Pick<ILocation, 'id' | 'city'> | null;
   exUser?: Pick<IExUser, 'id' | 'userName'> | null;
 }

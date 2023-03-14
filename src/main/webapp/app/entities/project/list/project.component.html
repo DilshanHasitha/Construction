@@ -88,6 +88,18 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="priority">
+            <div class="d-flex">
+              <span>Priority</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="progress">
+            <div class="d-flex">
+              <span>Progress</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="location.city">
             <div class="d-flex">
               <span>Location</span>
@@ -116,6 +128,8 @@
           <td>{{ project.regNumber }}</td>
           <td>{{ project.notes }}</td>
           <td>{{ project.address }}</td>
+          <td>{{ project.priority }}</td>
+          <td>{{ project.progress }}</td>
           <td>
             <div *ngIf="project.location">
               <a [routerLink]="['/location', project.location.id, 'view']">{{ project.location.city }}</a>

@@ -26,6 +26,8 @@ type ProjectFormGroupContent = {
   regNumber: FormControl<IProject['regNumber']>;
   notes: FormControl<IProject['notes']>;
   address: FormControl<IProject['address']>;
+  priority: FormControl<IProject['priority']>;
+  progress: FormControl<IProject['progress']>;
   location: FormControl<IProject['location']>;
   exUser: FormControl<IProject['exUser']>;
 };
@@ -57,6 +59,8 @@ export class ProjectFormService {
       regNumber: new FormControl(projectRawValue.regNumber),
       notes: new FormControl(projectRawValue.notes),
       address: new FormControl(projectRawValue.address),
+      priority: new FormControl(projectRawValue.priority),
+      progress: new FormControl(projectRawValue.progress),
       location: new FormControl(projectRawValue.location),
       exUser: new FormControl(projectRawValue.exUser),
     });

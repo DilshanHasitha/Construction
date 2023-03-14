@@ -37,6 +37,14 @@
     {
       "fieldName": "address",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Integer"
     }
   ],
   "fluentMethods": true,
