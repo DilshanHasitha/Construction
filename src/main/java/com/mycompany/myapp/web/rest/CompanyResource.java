@@ -185,6 +185,19 @@ public class CompanyResource {
         return ResponseUtil.wrapOrNotFound(company);
     }
 
+    @GetMapping("/companies/type/{code}")
+    public ResponseEntity<List<Company>> getAllCompaniesByType(
+        @PathVariable String code,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Companies by Company Type: {}", code);
+        System.out.println("REST request to get Companies by Company Type: {}" + code);
+
+        Page<Company> companies = companyService.getCompaniesByUserTypeCode(code, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), companies);
+        return ResponseEntity.ok().headers(headers).body(companies.getContent());
+    }
+
     /**
      * {@code DELETE  /companies/:id} : delete the "id" company.
      *

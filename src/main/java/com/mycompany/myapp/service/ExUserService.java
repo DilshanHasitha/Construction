@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.ExUser;
 import com.mycompany.myapp.repository.ExUserRepository;
+import com.mycompany.myapp.service.dto.ExUserLoginDTO;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,5 +131,11 @@ public class ExUserService {
     public void delete(Long id) {
         log.debug("Request to delete ExUser : {}", id);
         exUserRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<ExUserLoginDTO> findWithDetails(Long id) {
+        log.debug("Request to ExUser  with details: {}", id);
+        return exUserRepository.findUserWithDetails(id);
     }
 }

@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Company;
 import com.mycompany.myapp.repository.CompanyRepository;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,5 +119,9 @@ public class CompanyService {
     public void delete(Long id) {
         log.debug("Request to delete Company : {}", id);
         companyRepository.deleteById(id);
+    }
+
+    public Page<Company> getCompaniesByUserTypeCode(String code, Pageable pageable) {
+        return companyRepository.findByUserTypeCode(code, pageable);
     }
 }

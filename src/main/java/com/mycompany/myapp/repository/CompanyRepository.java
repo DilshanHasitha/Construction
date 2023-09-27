@@ -37,4 +37,8 @@ public interface CompanyRepository extends JpaRepository<Company, Long>, JpaSpec
 
     @Query("select company from Company company left join fetch company.userType where company.id =:id")
     Optional<Company> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Optional<Company> findByCode(String code);
+
+    Page<Company> findByUserTypeCode(String code, Pageable pageable);
 }

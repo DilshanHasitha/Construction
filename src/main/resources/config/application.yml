@@ -211,3 +211,6 @@ jhipster:
 # ===================================================================
 
 # application:
+logging:
+  level:
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

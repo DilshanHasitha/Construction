@@ -5,6 +5,7 @@ import com.mycompany.myapp.repository.ExUserRepository;
 import com.mycompany.myapp.service.ExUserQueryService;
 import com.mycompany.myapp.service.ExUserService;
 import com.mycompany.myapp.service.criteria.ExUserCriteria;
+import com.mycompany.myapp.service.dto.ExUserLoginDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -183,6 +184,14 @@ public class ExUserResource {
         log.debug("REST request to get ExUser : {}", id);
         Optional<ExUser> exUser = exUserService.findOne(id);
         return ResponseUtil.wrapOrNotFound(exUser);
+    }
+
+    @GetMapping("/ex-users/withDetails/{id}")
+    public ResponseEntity<ExUserLoginDTO> getExUserWithDetails(@PathVariable Long id) {
+        log.debug("REST request to get ExUser : {}", id);
+        Optional<ExUserLoginDTO> exUserLoginDTO = exUserService.findWithDetails(id);
+        System.out.println("REST request to get ExUser " + exUserLoginDTO.get().getFirstName());
+        return ResponseUtil.wrapOrNotFound(exUserLoginDTO);
     }
 
     /**

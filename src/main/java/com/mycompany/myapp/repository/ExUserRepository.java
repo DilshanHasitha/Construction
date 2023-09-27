@@ -1,6 +1,7 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.ExUser;
+import com.mycompany.myapp.service.dto.ExUserLoginDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -37,4 +38,9 @@ public interface ExUserRepository extends JpaRepository<ExUser, Long>, JpaSpecif
 
     @Query("select exUser from ExUser exUser left join fetch exUser.userRole left join fetch exUser.company where exUser.id =:id")
     Optional<ExUser> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query(
+        "Select NEW com.mycompany.myapp.service.dto.ExUserLoginDTO (exu.id, exu.login, exu.userName, exu.firstName, exu.lastName, exu.email, exu.phone, c.brNumber, c.name, c.code, ut.code) FROM ExUser exu JOIN exu.user u JOIN exu.company c JOIN c.userType ut where u.id =:id"
+    )
+    Optional<ExUserLoginDTO> findUserWithDetails(@Param("id") Long id);
 }

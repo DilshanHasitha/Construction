@@ -2,8 +2,12 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.Company;
+import com.mycompany.myapp.domain.ExUser;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.AuthorityRepository;
+import com.mycompany.myapp.repository.CompanyRepository;
+import com.mycompany.myapp.repository.ExUserRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
@@ -34,23 +38,30 @@ public class UserService {
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
+    private final ExUserRepository exUserRepository;
 
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
+    private final CompanyRepository companyRepository;
+
     private final CacheManager cacheManager;
 
     public UserService(
         UserRepository userRepository,
+        ExUserRepository exUserRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        CompanyRepository companyRepository
     ) {
         this.userRepository = userRepository;
+        this.exUserRepository = exUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.companyRepository = companyRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -111,6 +122,7 @@ public class UserService {
                 }
             });
         User newUser = new User();
+
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
@@ -123,14 +135,29 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true); // TODO : change this when go with live
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
-        this.clearUserCaches(newUser);
+        Company company = companyRepository.findByCode("SYS_COM").get();
+
+        User newUserT = userRepository.save(newUser);
+        System.out.println("Account Resource | New user ID : " + newUserT.getId());
+        ExUser exUser = new ExUser();
+
+        exUser.setIsActive(true); // TODO: change this when go with live
+        exUser.setUserName(newUserT.getLogin());
+        exUser.setFirstName(newUserT.getFirstName());
+        exUser.setLastName(newUserT.getLastName());
+        exUser.setEmail(newUserT.getEmail());
+        exUser.setUser(newUserT);
+        exUser.setLogin(newUserT.getLogin());
+        exUser.setCompany(company);
+
+        exUserRepository.save(exUser);
+        this.clearUserCaches(newUserT);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
